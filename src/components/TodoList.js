@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import {
-    Box, Text, VStack, StackDivider, HStack, Flex,  
-    Modal, ModalOverlay,ModalContent,
-    ModalHeader, ModalCloseButton,ModalBody,ModalFooter,
-    Input, Button
+    Box, Text, VStack, StackDivider, Flex,
+    Modal, ModalOverlay, ModalContent,
+    ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
+    Input, Button, SimpleGrid, GridItem
 } from '@chakra-ui/react'
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 
@@ -52,48 +52,50 @@ function TodoList({ todos, deleteTodo, editTodo }) {
                     divider={<StackDivider />}
                     borderColor='gray.100'
                     borderWidth='2px'
+                    maxW={350}
                     p='5'
                     borderRadius='lg'
                     alignItems='stretch'>
                     {todos.map((todo) => (
 
-                        <HStack>
-                            <Flex pt="3" pl="8" pb="8" pr="8" w="20em" h="1" justifyContent="space-between">
-                                <Text>{todo.text}</Text>
+                        <SimpleGrid columns={5} columnGap={3} rowGap={6} w="full" mt={2} mb={2}>
+                            <GridItem colSpan={4}><Text>{todo.text}</Text></GridItem>
 
+                            <GridItem colSpan={1} mr="12" >
                                 <Flex w="10%" >
                                     <DeleteIcon mr="5" cursor='pointer' onClick={() => deleteTodo(todo.id)} />
                                     <EditIcon cursor='pointer' onClick={() => handleEditClick(todo)} />
                                 </Flex>
+                            </GridItem>
 
-                                <Modal isCentered isOpen={isOpen} onClose={onClose}>
-                                    <ModalOverlay />
-                                    <ModalContent>
-                                        <ModalHeader>Edit todo</ModalHeader>
-                                        <ModalCloseButton />
-                                        <form onSubmit={handleEditSubmit}>
-                                            <ModalBody>
-                                                <Input
-                                                    value={modalContent.text}
-                                                    key={modalContent.id}
-                                                    variant="outline"
-                                                    type="text"
-                                                    placeholder="Update todo..."
-                                                    onChange={handleEditInputChange} />
-                                            </ModalBody>
-                                            <ModalFooter>
-                                                <Button colorScheme="red" mr={3} onClick={onClose}>
-                                                    Cancel
-                                                </Button>
-                                                <Button type="submit" colorScheme="green" mr={3}>
-                                                    Save
-                                                </Button>
-                                            </ModalFooter>
-                                        </form>
-                                    </ModalContent>
-                                </Modal>
-                            </Flex>
-                        </HStack>
+
+                            <Modal isCentered isOpen={isOpen} onClose={onClose}>
+                                <ModalOverlay />
+                                <ModalContent>
+                                    <ModalHeader>Edit todo</ModalHeader>
+                                    <ModalCloseButton />
+                                    <form onSubmit={handleEditSubmit}>
+                                        <ModalBody>
+                                            <Input
+                                                value={modalContent.text}
+                                                key={modalContent.id}
+                                                variant="outline"
+                                                type="text"
+                                                placeholder="Update todo..."
+                                                onChange={handleEditInputChange} />
+                                        </ModalBody>
+                                        <ModalFooter>
+                                            <Button colorScheme="red" mr={3} onClick={onClose}>
+                                                Cancel
+                                            </Button>
+                                            <Button type="submit" colorScheme="green" mr={3}>
+                                                Save
+                                            </Button>
+                                        </ModalFooter>
+                                    </form>
+                                </ModalContent>
+                            </Modal>
+                        </SimpleGrid>
                     ))}
                 </VStack>
             )
