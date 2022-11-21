@@ -34,16 +34,16 @@ function Todo({ addTodo }) {
         <form onSubmit={handleSubmit}>
             <HStack mt='4' mb='4'>
                 <Input
+                    variant="outline"
+                    placeholder="Enter new todo..."
                     h='46'
                     size='lg'
                     value={content}
-                    variant="outline"
-                    placeholder="Enter new todo..."
                     onChange={(e) => setContent(e.target.value)} />
                 <Button
+                    type="submit"
                     colorScheme="green"
-                    h='46'
-                    type="submit">
+                    h='46'>
                     Add
                 </Button>
             </HStack>

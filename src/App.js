@@ -19,18 +19,17 @@ function App() {
     }
 
     function editTodo(id, updatedTodo) {
-        const updatedItem = todos.map((todo) => {
+        const updatedTask = todos.map((todo) => {
             return todo.id === id ? updatedTodo : todo;
         });
-        setTodos(updatedItem)
+        setTodos(updatedTask)
     }
 
     function deleteTodo(id) {
-        const newTodos = todos.filter((item) => {
-            return item.id !== id
+        const newTodos = todos.filter((task) => {
+            return task.id !== id
         })
         setTodos(newTodos)
-        console.log(newTodos)
     }
 
     return (
